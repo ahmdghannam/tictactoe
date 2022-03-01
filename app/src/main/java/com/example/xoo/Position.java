@@ -1,6 +1,9 @@
 package com.example.xoo;
 
+import androidx.annotation.NonNull;
+
 public class Position {
+
     private int x;
     private int y;
 
@@ -34,6 +37,8 @@ public class Position {
     public static int getButtonNumber(int x,int y){
         return ((3*x)+y);
     }
+
+    @NonNull
     @Override
     public String toString() {
         return "Position{" +

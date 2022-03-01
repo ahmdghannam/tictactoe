@@ -10,40 +10,30 @@ public class PositionsArray {
     }
 
     public boolean isWon(){
-        int count=0;
+
+        int []count={0,0,0,0};
         Position toCompare=arr[toAdd-1];
 
-        // rows
-        for (int i = 0; i < toAdd - 1; i++) {
-            if (arr[i].getX()==toCompare.getX())count++;
-        }
-        if (count==2)return true;
-
-        // columns
-        count=0;
-        for (int i = 0; i < toAdd - 1; i++) {
-            if (arr[i].getY()==toCompare.getY())count++;
-        }
-        if (count==2)return true;
-
-        //main diagonal
-        count=0;
+        // to check the needed buttons only when checking diagonals
         boolean compareMainDiagonalCondition=toCompare.getX()==toCompare.getY();
-        if (compareMainDiagonalCondition)
-        for (int i = 0; i < toAdd - 1; i++) {
-            if (arr[i].getY()==arr[i].getX())count++;
-        }
-        if (count==2)return true;
-
-        //secondary diagonal
-        count=0;
         boolean compareSecondaryDiagonalCondition=toCompare.getX()+toCompare.getY()==2;
-        if (compareSecondaryDiagonalCondition)
-            for (int i = 0; i < toAdd- 1; i++) {
-                if (arr[i].getY()+arr[i].getX()==2)count++;
-            }
 
-        return count == 2;
+        for (int i = 0; i < toAdd - 1; i++) {
+            // rows
+            if (arr[i].getX()==toCompare.getX())count[0]++;
+            // columns
+            if (arr[i].getY()==toCompare.getY())count[1]++;
+            //main diagonal
+            if (compareMainDiagonalCondition&&(arr[i].getY()==arr[i].getX()))count[2]++;
+             //secondary diagonal
+            if (compareSecondaryDiagonalCondition&&(arr[i].getY()+arr[i].getX()==2))count[3]++;
+        }
+
+        // if any circumstance of win match
+        for (int i = 0; i < 4; i++) if (count[i]==2)return true;
+
+        // if no winner yet
+        return false;
     }
     public boolean addThenCheckWin(Position position){
         add(position);
