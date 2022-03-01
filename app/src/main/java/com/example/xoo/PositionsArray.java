@@ -30,7 +30,7 @@ public class PositionsArray {
         }
 
         // if any circumstance of win match
-        for (int i = 0; i < 4; i++) if (count[i]==2)return true;
+        for (int c:count) if (c==2)return true;
 
         // if no winner yet
         return false;
