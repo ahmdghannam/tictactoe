@@ -11,18 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private  boolean isItO = false, finished = false ,isWon=false;
+    private boolean isItO = false, finished = false, isWon = false;
     private Button[] btn;
     private TextView resetText;
-    private  AlertDialog.Builder ad;
-    private  int counter = 0;
-    private  PositionsArray xPositions,oPositions;
+    private AlertDialog.Builder ad;
+    private int counter = 0;
+    private PositionsArray xPositions, oPositions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        xPositions=new PositionsArray();
-        oPositions=new PositionsArray();
+        xPositions = new PositionsArray();
+        oPositions = new PositionsArray();
         RtoXML();
         onClickListeners();
 
@@ -61,20 +62,19 @@ public class MainActivity extends AppCompatActivity {
         ad.setMessage("do you want to reset the game ?");
         ad.setTitle("alert !");
         ad.setCancelable(true);
-
         ad.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 counter = 0;
                 isItO = false;
-                isWon=false;
-                finished=false;
+                isWon = false;
+                finished = false;
                 for (int i = 0; i < 9; i++) {
                     btn[i].setText(String.valueOf(i + 1));
                 }
-                xPositions=new PositionsArray();
-                oPositions=new PositionsArray();
+                xPositions = new PositionsArray();
+                oPositions = new PositionsArray();
 
                 resetText.setVisibility(View.GONE);
 
@@ -97,33 +97,31 @@ public class MainActivity extends AppCompatActivity {
     public void btnClick(Position position, Button[] btn) {
 
         try {
-            int n= position.getButtonNumber();
-            int IntegerValueOfText=(int)btn[n].getText().toString().charAt(0);
-            boolean buttonIsNotClickedBefore= IntegerValueOfText<58;
+            int n = position.getButtonNumber();
+            int IntegerValueOfText = (int) btn[n].getText().toString().charAt(0);
+            boolean buttonIsNotClickedBefore = IntegerValueOfText < 58;
 
-            if ( !finished && buttonIsNotClickedBefore && !isWon) {
+            if (!finished && buttonIsNotClickedBefore && !isWon) {
 
-               String XO= isItO ?"o":"X";
-               btn[n].setText(XO);
-               if (isItO) oPositions.add(position);
-               else xPositions.add(position);
+                String XO = isItO ? "o" : "X";
+                btn[n].setText(XO);
+                if (isItO) oPositions.add(position);
+                else xPositions.add(position);
                 counter++;
 
-                if (won(btn,isItO)) {
+                if (won(btn, isItO)) {
                     resetText.setVisibility(View.VISIBLE);
                     if (isItO) Toast.makeText(this, "O won", Toast.LENGTH_LONG).show();
-                        else Toast.makeText(this, "X won", Toast.LENGTH_LONG).show();
-                }
-                else if (finished()) {
+                    else Toast.makeText(this, "X won", Toast.LENGTH_LONG).show();
+                } else if (finished()) {
                     resetText.setVisibility(View.VISIBLE);
                     Toast.makeText(this, "the game just finished", Toast.LENGTH_LONG).show();
                 }
                 isItO = !isItO;
 
+            } else if (!(buttonIsNotClickedBefore || finished || isWon)) {
+                Toast.makeText(this, "this card has been taken", Toast.LENGTH_SHORT).show();
             }
-
-            else if (!(buttonIsNotClickedBefore||finished||isWon)){
-                Toast.makeText(this, "this card has been taken", Toast.LENGTH_SHORT).show();}
         } catch (Exception c) {
             Toast.makeText(this, c.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -131,14 +129,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean finished() {
-        finished= counter == 9;
+        finished = counter == 9;
         return finished;
     }
 
-    public boolean won(Button[] btn,boolean isItO) {
+    public boolean won(Button[] btn, boolean isItO) {
 
-        if (counter<5) return false;
-       isWon=isItO? oPositions.isWon():xPositions.isWon();
-       return isWon;
+        if (counter < 5) return false;
+        isWon = isItO ? oPositions.isWon() : xPositions.isWon();
+        return isWon;
     }
 }
