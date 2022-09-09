@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void RtoXML() {
         resetText = findViewById(R.id.reset);
-        resetText.setVisibility(View.GONE);
         btn = new Button[9];
         btn[0] = findViewById(R.id.button);
         btn[1] = findViewById(R.id.button1);
@@ -57,37 +56,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset() {
-
         ad = new AlertDialog.Builder(MainActivity.this);
         ad.setMessage("do you want to reset the game ?");
         ad.setTitle("alert !");
         ad.setCancelable(true);
-        ad.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                counter = 0;
-                isItO = false;
-                isWon = false;
-                finished = false;
-                for (int i = 0; i < 9; i++) {
-                    btn[i].setText(String.valueOf(i + 1));
-                }
-                xPositions = new PositionsArray();
-                oPositions = new PositionsArray();
-
-                resetText.setVisibility(View.GONE);
-
+        ad.setPositiveButton("YES", (dialog, which) -> {
+            counter = 0;
+            isItO = false;
+            isWon = false;
+            finished = false;
+            for (int i = 0; i < 9; i++) {
+                btn[i].setText(String.valueOf(i + 1));
             }
+            xPositions = new PositionsArray();
+            oPositions = new PositionsArray();
+
+
         });
 
-
-        ad.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        ad.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
         AlertDialog dialog = ad.create();
         dialog.show();
 
