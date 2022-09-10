@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     else Toast.makeText(this, "X won", Toast.LENGTH_LONG).show();
                 } else if (finished()) {
                     resetText.setVisibility(View.VISIBLE);
-                    Toast.makeText(this, "the game just finished", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Draw", Toast.LENGTH_LONG).show();
                 }
                 isItO = !isItO;
 
