@@ -4,9 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/gl_h_5"
+        >
 
-    >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:title="tic tac toe"
+                app:titleTextColor="@color/white"
+                />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="0:0"
+                android:textColor="@color/white"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="@dimen/_18ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <Button
@@ -14,49 +61,54 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_1"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_90sdp"
-
         app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <Button
-
 
         android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_2"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_90sdp"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <Button
-
-
         android:id="@+id/button4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_5"
         android:textColor="#00BCD4"
         android:textColorHint="#FFFFFF"
         android:textSize="@dimen/_90sdp"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
@@ -69,31 +121,35 @@
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_3"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_90sdp"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/gl_h_5" />
 
     <Button
-
 
         android:id="@+id/button3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_4"
+        android:autoSizeTextType="uniform"
         android:textColor="@color/text_color"
         android:textColorHint="#FFFFFF"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
         android:textSize="@dimen/_90sdp"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toStartOf="@+id/view2"
@@ -108,13 +164,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_6"
         android:textColor="@color/text_color"
         android:textColorHint="#FFFFFF"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
         android:textSize="@dimen/_90sdp"
-
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -128,12 +186,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_7"
         android:textColor="@color/text_color"
         android:textColorHint="#FFFFFF"
         android:textSize="@dimen/_90sdp"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -147,12 +208,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_8"
         android:textColor="@color/text_color"
         android:textColorHint="#FFFFFF"
         android:textSize="@dimen/_90sdp"
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
@@ -165,19 +229,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="center"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/_9"
         android:textColor="@color/text_color"
         android:textColorHint="#FFFFFF"
-        android:textSize="@dimen/_90sdp"
-
+        android:autoSizeMaxTextSize="@dimen/_90sdp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/view" />
-
 
 
     <View
@@ -237,14 +301,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.66" />
+        app:layout_constraintGuide_percent="0.67" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_h_33"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.36" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_v_33"
@@ -253,21 +317,29 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.33" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
     <Button
         android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
+        android:background="@drawable/button_background"
+        android:gravity="center"
+        android:minWidth="@dimen/_48sdp"
+        android:minHeight="@dimen/_40sdp"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:text="@string/reset"
-        android:background="@drawable/button_background"
         android:textColor="@color/text_color"
-        android:textSize="20sp"
+        android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@+id/button4"
-        app:layout_constraintEnd_toStartOf="@+id/view3"
-        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/gl_v_66"
+        app:layout_constraintStart_toStartOf="@+id/gl_v_33"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

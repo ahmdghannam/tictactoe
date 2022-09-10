@@ -11,7 +11,7 @@ public class PositionsArray {
 
     public boolean isWon(){
 
-        int []count={0,0,0,0};
+        int []count = {0,0,0,0};
         Position toCompare=arr[toAdd-1];
 
         // to check the needed buttons only when checking diagonals

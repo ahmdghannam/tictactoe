@@ -1,20 +1,22 @@
 package com.example.xoo;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import  com.example.xoo.*;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 
 public class MainActivity extends AppCompatActivity {
     private boolean isItO = false, finished = false, isWon = false;
     private Button[] btn;
-    private TextView resetText;
-    private AlertDialog.Builder ad;
+    private TextView resetText, title;
     private int counter = 0;
     private PositionsArray xPositions, oPositions;
 
@@ -25,13 +27,32 @@ public class MainActivity extends AppCompatActivity {
         xPositions = new PositionsArray();
         oPositions = new PositionsArray();
         RtoXML();
+        livedata();
         onClickListeners();
+
+    }
+
+    private void livedata() {
+
+        Values.firstScore.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                title.setText(Values.changeTheTitleScore());
+            }
+        });
+        Values.secondScore.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                title.setText(Values.changeTheTitleScore());
+            }
+        });
 
     }
 
     private void RtoXML() {
         resetText = findViewById(R.id.reset);
         btn = new Button[9];
+        title = findViewById(R.id.tv_score);
         btn[0] = findViewById(R.id.button);
         btn[1] = findViewById(R.id.button1);
         btn[2] = findViewById(R.id.button2);
@@ -56,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset() {
-        ad = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogCustom);
         ad.setMessage("do you want to reset the game ?");
         ad.setTitle("alert !");
         ad.setCancelable(true);
@@ -83,19 +104,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnClick(Position position, Button[] btn) {
 
-        try {
+       try {
             int n = position.getButtonNumber();
-            int IntegerValueOfText = (int) btn[n].getText().toString().charAt(0);
+            int IntegerValueOfText = btn[n].getText().toString().charAt(0);
             boolean buttonIsNotClickedBefore = IntegerValueOfText < 58;
-
             if (!finished && buttonIsNotClickedBefore && !isWon) {
-
                 String XO = isItO ? "o" : "X";
                 btn[n].setText(XO);
                 if (isItO) oPositions.add(position);
                 else xPositions.add(position);
                 counter++;
-
                 if (won(btn, isItO)) {
                     resetText.setVisibility(View.VISIBLE);
                     if (isItO) Toast.makeText(this, "O won", Toast.LENGTH_LONG).show();
@@ -106,11 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 isItO = !isItO;
 
-            } else if (!(buttonIsNotClickedBefore || finished || isWon)) {
-                Toast.makeText(this, "this card has been taken", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception c) {
             Toast.makeText(this, c.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.i("batata", c.getMessage());
         }
 
     }
@@ -124,6 +141,35 @@ public class MainActivity extends AppCompatActivity {
 
         if (counter < 5) return false;
         isWon = isItO ? oPositions.isWon() : xPositions.isWon();
+        if (isWon){
+            if (isItO) Values.increaseSecondScore();
+            else Values.increaseFirstScore();
+        }
         return isWon;
     }
+
+    @Override
+    public void onBackPressed() {
+        alertDialog();
+    }
+
+    private void alertDialog() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("stop the game ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                (dialog, id) -> {
+                    super.onBackPressed();
+                    dialog.cancel();
+                });
+
+        builder1.setNegativeButton("No", (dialog, id) -> dialog.cancel());
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+
 }
